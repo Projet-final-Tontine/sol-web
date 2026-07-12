@@ -7,7 +7,7 @@ export const queryClient = new QueryClient({
       staleTime: 30_000,            // une donnée est "fraîche" 30 s par défaut
       refetchOnWindowFocus: true,   // re-synchronise quand l'admin revient sur l'onglet
       retry: (failureCount, error) => {
-        const status = (error as ApiError).status;
+        const status = (error as unknown as ApiError).status;
         // Erreur client (400, 401, 403, 404…) : réessayer ne changera rien.
         if (status >= 400 && status < 500) return false;
         // Erreur serveur ou réseau : deux tentatives supplémentaires max.
