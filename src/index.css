@@ -51,51 +51,51 @@
 }
 
 /* ── Identité Sol en Ligne ─────────────────────────────── */
+/* ── Identité Sol en Ligne ─────────────────────────────── */
 :root {
-    --background: hsl(220 37% 97%);        /* #F4F6FA */
-    --foreground: hsl(222 47% 11%);
+    --background: hsl(240 30% 97%);
+    --foreground: hsl(240 25% 12%);
     --card: hsl(0 0% 100%);
-    --card-foreground: hsl(222 47% 11%);
+    --card-foreground: hsl(240 25% 12%);
     --popover: hsl(0 0% 100%);
-    --popover-foreground: hsl(222 47% 11%);
+    --popover-foreground: hsl(240 25% 12%);
 
-    --primary: hsl(216 61% 26%);           /* #1A3A6B */
+    --primary: hsl(243 75% 59%);           /* ← LE VIOLET */
     --primary-foreground: hsl(0 0% 100%);
 
-    --secondary: hsl(220 20% 94%);
-    --secondary-foreground: hsl(222 47% 11%);
-    --muted: hsl(220 20% 94%);
-    --muted-foreground: hsl(220 9% 46%);
-    --accent: hsl(220 20% 94%);
-    --accent-foreground: hsl(222 47% 11%);
+    --secondary: hsl(240 20% 94%);
+    --secondary-foreground: hsl(240 25% 12%);
+    --muted: hsl(240 20% 94%);
+    --muted-foreground: hsl(240 8% 46%);
+    --accent: hsl(240 20% 94%);
+    --accent-foreground: hsl(240 25% 12%);
 
     --destructive: hsl(0 72% 45%);
     --success: hsl(152 60% 34%);
     --warning: hsl(35 92% 44%);
 
-    --border: hsl(220 13% 91%);
-    --input: hsl(220 13% 91%);
-    --ring: hsl(216 61% 26%);
+    --border: hsl(240 13% 91%);
+    --input: hsl(240 13% 91%);
+    --ring: hsl(243 75% 59%);
 
-    --chart-1: hsl(216 61% 40%);           /* entrées */
+    --chart-1: hsl(243 75% 59%);           /* entrées */
     --chart-2: hsl(152 55% 40%);           /* sorties */
     --chart-3: hsl(35 92% 44%);
-    --chart-4: hsl(220 9% 46%);
+    --chart-4: hsl(240 8% 46%);
     --chart-5: hsl(0 72% 45%);
 
     --radius: 0.625rem;
 
-    /* Sidebar — navy profond */
-    --sidebar: hsl(217 55% 14%);
-    --sidebar-foreground: hsl(220 20% 96%);
-    --sidebar-primary: hsl(216 61% 40%);
+    /* Sidebar — violet profond */
+    --sidebar: hsl(244 47% 20%);
+    --sidebar-foreground: hsl(240 20% 96%);
+    --sidebar-primary: hsl(243 75% 59%);
     --sidebar-primary-foreground: hsl(0 0% 100%);
-    --sidebar-accent: hsl(217 40% 22%);
+    --sidebar-accent: hsl(244 35% 28%);
     --sidebar-accent-foreground: hsl(0 0% 100%);
-    --sidebar-border: hsl(217 40% 22%);
-    --sidebar-ring: hsl(216 61% 40%);
+    --sidebar-border: hsl(244 35% 28%);
+    --sidebar-ring: hsl(243 75% 59%);
 }
-
 /* Non utilisé en v1 — présent pour ne rien casser. */
 .dark {
     --background: hsl(222 40% 9%);

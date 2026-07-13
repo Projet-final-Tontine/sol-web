@@ -1,4 +1,9 @@
-import { Bell, Menu, Search } from "lucide-react";
+import { Bell, LogOut, Menu, Search } from "lucide-react";
+import {
+  DropdownMenu, DropdownMenuContent, DropdownMenuItem,
+  DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/features/auth";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,6 +11,8 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/s
 import { Sidebar } from "./Sidebar";
 
 export function Topbar() {
+  const { utilisateur, deconnexion } = useAuth();
+
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b bg-card px-4 lg:px-6">
       {/* Menu mobile : la MÊME Sidebar, servie dans un Sheet */}
@@ -32,12 +39,45 @@ export function Topbar() {
         <Button variant="ghost" size="icon" aria-label="Notifications">
           <Bell className="h-5 w-5" />
         </Button>
-        <Avatar className="h-8 w-8">
-          <AvatarFallback className="bg-primary text-xs text-primary-foreground">
-            AD
-          </AvatarFallback>
-        </Avatar>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger className="flex items-center gap-2 rounded-md px-2 py-1 hover:bg-accent">
+            <Avatar className="h-8 w-8">
+              <AvatarFallback className="bg-primary text-xs text-primary-foreground">
+                {initiales(utilisateur)}
+              </AvatarFallback>
+            </Avatar>
+            <span className="hidden text-sm font-medium md:inline">
+              {utilisateur?.prenom} {utilisateur?.nom}
+            </span>
+          </DropdownMenuTrigger>
+
+          <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuLabel className="space-y-0.5">
+              <p className="text-sm font-medium">
+                {utilisateur?.prenom} {utilisateur?.nom}
+              </p>
+              <p className="text-xs font-normal text-muted-foreground">
+                Administrateur
+              </p>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={deconnexion}
+              className="text-destructive focus:text-destructive"
+            >
+              <LogOut className="mr-2 h-4 w-4" />
+              Se déconnecter
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   );
+}
+
+/* Helper : "Mitovens Laguerre" → "ML" */
+function initiales(u: { prenom: string; nom: string } | null) {
+  if (!u) return "AD";
+  return `${u.prenom[0] ?? ""}${u.nom[0] ?? ""}`.toUpperCase();
 }
