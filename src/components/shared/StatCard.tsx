@@ -4,13 +4,26 @@ import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
+/** Tons disponibles pour la pastille d'icône. */
+type Tone = "violet" | "emeraude" | "bleu" | "ambre";
+
+/** Pastille teintée + icône soutenue. Jamais de fond saturé. */
+const TONES: Record<Tone, { pastille: string; icone: string }> = {
+  violet:   { pastille: "bg-primary/10",  icone: "text-primary" },
+  emeraude: { pastille: "bg-emerald-50",  icone: "text-emerald-600" },
+  bleu:     { pastille: "bg-sky-50",      icone: "text-sky-600" },
+  ambre:    { pastille: "bg-amber-50",    icone: "text-amber-600" },
+};
+
 interface StatCardProps {
   /** Libellé du KPI : "Total collecté" */
   label: string;
-  /** Valeur déjà formatée : "25 750,00 HTG" ou "128" */
+  /** Valeur déjà formatée : "458 200,00 HTG" ou "128" */
   value: string;
   /** Icône lucide affichée en pastille. */
   icon: LucideIcon;
+  /** Couleur de la pastille. Défaut : violet (identité de marque). */
+  tone?: Tone;
   /** Variation vs période précédente, en ratio : 0.125 → +12,5 % */
   delta?: number;
   /** Contexte du delta : "ce mois" */
@@ -25,6 +38,7 @@ export function StatCard({
   label,
   value,
   icon: Icon,
+  tone = "violet",
   delta,
   deltaLabel,
   higherIsBetter = true,
@@ -53,8 +67,13 @@ export function StatCard({
     <Card className={cn("p-5", className)}>
       <div className="flex items-start justify-between gap-3">
         <p className="text-sm font-medium text-muted-foreground">{label}</p>
-        <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10">
-          <Icon className="h-[18px] w-[18px] text-primary" />
+        <div
+          className={cn(
+            "grid h-9 w-9 shrink-0 place-items-center rounded-lg",
+            TONES[tone].pastille
+          )}
+        >
+          <Icon className={cn("h-[18px] w-[18px]", TONES[tone].icone)} />
         </div>
       </div>
 

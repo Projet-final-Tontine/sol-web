@@ -1,8 +1,7 @@
 /* Formatage centralisé. Un seul endroit pour toute l'application. */
 
 const HTG = new Intl.NumberFormat("fr-HT", {
-  style: "currency",
-  currency: "HTG",
+  style: "decimal",
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
@@ -29,7 +28,7 @@ const DATE_LONGUE = new Intl.DateTimeFormat("fr-HT", {
 });
 
 /** 2500 → "2 500,00 HTG" */
-export const formatHTG = (montant: number) => HTG.format(montant);
+export const formatHTG = (montant: number) => `${HTG.format(montant)} HTG`;
 
 /** 18450 → "18,5 k" — pour les axes de graphiques */
 export const formatHTGCompact = (montant: number) => HTG_COMPACT.format(montant);
