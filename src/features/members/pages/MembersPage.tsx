@@ -143,11 +143,10 @@ export default function MembersPage() {
         </div>
 
         <Select
-          value={statut}
-          onValueChange={(v) => {
-            setStatut(v);
-            setPage(0);
-          }}
+         onValueChange={(v: string | null) => {
+  setStatut(v ?? "TOUS");
+  setPage(0);
+}}
         >
           <SelectTrigger className="sm:w-48">
             <SelectValue placeholder="Statut" />
