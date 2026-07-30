@@ -1,38 +1,53 @@
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
-/** Familles de statuts du domaine. */
+/** Statuts réels du backend + statuts de litige. */
 export type Statut =
-  // Comptes (backend : EN_ATTENTE, ACTIF, BLOQUE, INACTIF)
+  // Comptes utilisateur
   | "ACTIF" | "EN_ATTENTE" | "BLOQUE" | "INACTIF"
-  // Tontines / Sols
-  | "EN_COURS" | "TERMINE" | "ANNULE"
-  // Cotisations & paiements
-  | "PAYEE" | "IMPAYEE" | "EN_RETARD" | "REMBOURSEE"
+  // Sols (tontines)
+  | "OUVERT" | "EN_COURS" | "TERMINE" | "CLOTURE"
+  // Cotisations / transactions
+  | "VALIDE" | "REJETE" | "EN_RETARD"
+  // Membres d'un sol
+  | "DEFAILLANT" | "PARTI" | "REFUSE"
+  // Dashboard (mock)
+  | "PAYEE" | "IMPAYEE"
   // Litiges
-  | "OUVERT" | "RESOLU" | "REJETE";
+  | "RESOLU";
 
 type Ton = "success" | "warning" | "danger" | "neutral" | "info";
 
 /** Table unique : statut → libellé lisible + ton sémantique. */
 const CONFIG: Record<Statut, { libelle: string; ton: Ton }> = {
+  /* Comptes */
   ACTIF:       { libelle: "Actif",       ton: "success" },
   EN_ATTENTE:  { libelle: "En attente",  ton: "warning" },
   BLOQUE:      { libelle: "Bloqué",      ton: "danger"  },
   INACTIF:     { libelle: "Inactif",     ton: "neutral" },
 
-  EN_COURS:    { libelle: "En cours",    ton: "info"    },
+  /* Sols */
+  OUVERT:      { libelle: "Ouvert",      ton: "info"    },
+  EN_COURS:    { libelle: "En cours",    ton: "success" },
   TERMINE:     { libelle: "Terminé",     ton: "neutral" },
-  ANNULE:      { libelle: "Annulé",      ton: "danger"  },
+  CLOTURE:     { libelle: "Clôturé",     ton: "neutral" },
 
+  /* Cotisations / transactions */
+  VALIDE:      { libelle: "Validée",     ton: "success" },
+  REJETE:      { libelle: "Rejeté",      ton: "danger"  },
+  EN_RETARD:   { libelle: "En retard",   ton: "warning" },
+
+  /* Membres d'un sol */
+  DEFAILLANT:  { libelle: "Défaillant",  ton: "danger"  },
+  PARTI:       { libelle: "Parti",       ton: "neutral" },
+  REFUSE:      { libelle: "Refusé",      ton: "danger"  },
+
+  /* Dashboard */
   PAYEE:       { libelle: "Payée",       ton: "success" },
   IMPAYEE:     { libelle: "Impayée",     ton: "danger"  },
-  EN_RETARD:   { libelle: "En retard",   ton: "warning" },
-  REMBOURSEE:  { libelle: "Remboursée",  ton: "neutral" },
 
-  OUVERT:      { libelle: "Ouvert",      ton: "warning" },
+  /* Litiges */
   RESOLU:      { libelle: "Résolu",      ton: "success" },
-  REJETE:      { libelle: "Rejeté",      ton: "danger"  },
 };
 
 /** Fond teinté + texte soutenu — jamais de couleur pleine saturée. */
@@ -53,8 +68,7 @@ export function StatusBadge({
 }) {
   const config = CONFIG[statut];
 
-  /* Statut inconnu (backend qui évolue) : on affiche la valeur brute
-     plutôt que de planter ou d'afficher du vide. */
+  /* Statut inconnu : afficher la valeur brute plutôt que planter. */
   if (!config) {
     return (
       <Badge variant="outline" className={className}>

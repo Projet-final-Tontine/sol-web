@@ -7,12 +7,12 @@ import { cn } from "@/lib/utils";
 /** Tons disponibles pour la pastille d'icône. */
 type Tone = "violet" | "emeraude" | "bleu" | "ambre";
 
-/** Pastille teintée + icône soutenue. Jamais de fond saturé. */
+/** Pastille teintée + icône soutenue. */
 const TONES: Record<Tone, { pastille: string; icone: string }> = {
-  violet:   { pastille: "bg-primary/10",  icone: "text-primary" },
-  emeraude: { pastille: "bg-emerald-50",  icone: "text-emerald-600" },
-  bleu:     { pastille: "bg-sky-50",      icone: "text-sky-600" },
-  ambre:    { pastille: "bg-amber-50",    icone: "text-amber-600" },
+  violet:   { pastille: "bg-violet-100",  icone: "text-violet-600" },
+  emeraude: { pastille: "bg-emerald-100", icone: "text-emerald-600" },
+  bleu:     { pastille: "bg-sky-100",     icone: "text-sky-600" },
+  ambre:    { pastille: "bg-amber-100",   icone: "text-amber-600" },
 };
 
 interface StatCardProps {
@@ -22,7 +22,7 @@ interface StatCardProps {
   value: string;
   /** Icône lucide affichée en pastille. */
   icon: LucideIcon;
-  /** Couleur de la pastille. Défaut : violet (identité de marque). */
+  /** Couleur de la pastille. Défaut : violet. */
   tone?: Tone;
   /** Variation vs période précédente, en ratio : 0.125 → +12,5 % */
   delta?: number;
